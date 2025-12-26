@@ -4,12 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/users');
-const catalogRoutes = require('./routes/catalog');
-const socialRoutes = require('./routes/social');
-const badgeRoutes = require('./routes/badges');
-const aiRoutes = require('./routes/ai');
+const v1Routes = require('./routes/v1');
 
 function createApp() {
   const app = express();
@@ -20,12 +15,7 @@ function createApp() {
 
   app.get('/health', (req, res) => res.json({ ok: true }));
 
-  app.use('/auth', authRoutes);
-  app.use('/users', userRoutes);
-  app.use('/catalog', catalogRoutes);
-  app.use('/social', socialRoutes);
-  app.use('/badges', badgeRoutes);
-  app.use('/ai', aiRoutes);
+  app.use('/v1', v1Routes);
 
   app.use((err, req, res, next) => {
     const status = err.statusCode || 500;
